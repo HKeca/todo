@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <div class="navbar">
+      <div class="nav-title">Todo List</div>
+      <div>
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">About</a>
+      </div>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -12,12 +18,31 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  }
+
+  .nav-link {
+    color: #DD4336;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 1.3em;
+  }
+
+  .nav-title {
+    color: #DD4336;
+    font-weight: 500;
+    padding: 15px;
+    font-size: 2em;
+  }
 </style>
