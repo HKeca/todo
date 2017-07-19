@@ -4,7 +4,7 @@
       <div class="box-title">{{ item.title }}</div>
       <div class="box-desc">{{ item.description }}</div>
 
-      <a class="box-btn box-done" href="#" v-if="item.done == false">Done</a>
+      <a class="box-btn box-done" href="#" v-if="item.done">Done</a>
       <a class="box-btn" href="#" v-else>incomplete</a>
     </div>
   </div>
@@ -19,12 +19,14 @@
       }
     },
     computed: {
-
+      items() {
+        return this.$store.state.items;
+      }
     }
   }
 </script>
 
-<style scoped>
+<style>
   .container {
     margin: 20px;
     display: flex;

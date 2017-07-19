@@ -3,12 +3,12 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-export const store = Vuex.Store({
+export const store = new Vuex.Store({
     state: {
       items: [
-        {title: 'PHP', description: 'learn PHP', done: true},
-        {title: 'MySQL', description: 'learn MySQL', done: false},
-        {title: 'Java', description: 'learn Java', done: false}
+        {id: 1, title: 'PHP', description: 'learn PHP', done: true},
+        {id: 2, title: 'MySQL', description: 'learn MySQL', done: false},
+        {id: 3, title: 'Java', description: 'learn Java', done: false}
       ]
     }
 });
