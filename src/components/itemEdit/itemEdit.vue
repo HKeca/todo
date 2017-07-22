@@ -1,18 +1,22 @@
 <template>
   <div class="container">
     <div class="editBox">
-      <div class="editBox-title">Editing {{ title }}</div>
-
+      <div class="editBox-title">Editing {{ staticTitle }}</div>
       <div class="editBox-inputs">
         <div>
-          <input type="text" class="editBox-input" :value="title" placeholder="Title">
+          <input type="text" class="editBox-input" v-model="title" placeholder="Title">
         </div>
         <div>
           <textarea class="editBox-input-text" cols="40"
-                    rows="5" placeholder="Description" :value="desc"></textarea>
+                    rows="5" placeholder="Description" v-model="description"></textarea>
         </div>
         <div>
-          <button class="editBox-btn">Cancel</button><button class="editBox-btn">Save</button>
+          <input id="isDone" type="checkbox" v-model="done">
+          <label for="isDone">Is Done</label>
+        </div>
+        <div>
+          <button class="editBox-btn" @click="cancel()">Cancel</button>
+          <button class="editBox-btn" @click="save()">Save</button>
         </div>
       </div>
     </div>
@@ -21,11 +25,41 @@
 
 <script>
   export default {
+    name: 'itemEdit',
     data() {
       return {
-        title: 'Test',
-        desc: 'Some text that is awesome, so cool!'
+        id: "",
+        staticTitle: "",
+        title: "",
+        description: "",
+        done: false
       }
+    },
+    methods: {
+      cancel() {
+        return this.$router.push({path: '/'});
+      },
+      save() {
+        let data = {
+          id: this.id,
+          title: this.title,
+          description: this.description,
+          done: this.done
+        };
+
+        this.$store.commit('updateTodo', data);
+
+        return this.$router.push({path: '/'});
+      }
+    },
+    mounted() {
+        let data = this.$store.getters.getTodoById(this.$route.params.id);
+
+        this.id = data.id;
+        this.title = data.title;
+        this.description = data.description;
+        this.done = data.done;
+        this.staticTitle = data.title;
     }
   }
 </script>
@@ -55,7 +89,6 @@
   }
 
   .editBox-inputs {
-    /*margin: 10px auto;*/
     text-align:center;
     display: flex;
     flex-flow: column;
@@ -68,7 +101,7 @@
     width: 300px;
     border: none;
     border-left: 4px solid #DD4336;
-    background: #EDEDED;
+    background: #f9f9f9;
     font-size: 1.4em;
   }
 
@@ -76,7 +109,7 @@
     border: none;
     font-size: 1.4em;
     padding: 5px;
-    background: #EDEDED;
+    background: #f9f9f9;
     border-left: 4px solid #DD4336;
     resize: none;
   }
@@ -87,7 +120,8 @@
 
   .editBox-btn {
     border: 2px solid #DD4336;
-    padding: 10px;
+    cursor: pointer;
+    padding: 10px 25px;
     background: transparent;
     margin: 10px 10px;
     font-size: 1.2em;

@@ -1,10 +1,11 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import Home from '@/components/Home'
-import itemEdit from '@/components/itemEdit/itemEdit'
+import Home from '@/components/Home';
+import itemEdit from '@/components/itemEdit/itemEdit';
+import about from '@/components/About';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -14,9 +15,14 @@ export default new Router({
       component: Home
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       name: 'itemEdit',
       component: itemEdit
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: about
     }
   ]
-})
+});

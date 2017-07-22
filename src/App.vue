@@ -3,8 +3,9 @@
     <div class="navbar">
       <div class="nav-title">Todo List</div>
       <div>
+        <router-link class="nav-link" to="/?create=">New Todo</router-link>
         <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="#">About</a>
+        <router-link class="nav-link" to="/about">About</router-link>
       </div>
     </div>
     <router-view></router-view>
@@ -13,7 +14,10 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  mounted() {
+    this.$store.dispatch('getItemsFromStorage');
+  }
 }
 </script>
 
@@ -27,7 +31,7 @@ export default {
   .navbar {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     box-shadow: 0 0 6px rgba(0,0,0,0.3);
   }
@@ -37,6 +41,10 @@ export default {
     padding: 15px;
     text-decoration: none;
     font-size: 1.3em;
+  }
+
+  .nav-link:hover {
+    border-bottom: 3px solid #DD4336;
   }
 
   .nav-title {
