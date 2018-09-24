@@ -48,7 +48,7 @@
         };
 
         this.$store.commit('updateTodo', data);
-
+        this.$store.dispatch('saveItems');
         return this.$router.push({path: '/'});
       }
     },

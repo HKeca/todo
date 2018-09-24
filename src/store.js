@@ -46,6 +46,10 @@ export const store = new Vuex.Store({
       getItemsFromStorage(context) {
         let todoItems = JSON.parse(localStorage.getItem('items'));
 
+        if (todoItems === null)
+          return;
+
+
         todoItems.forEach((item) => {
           var temp = {
             id: item.id,
